@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import jsPDF from "jspdf";
+import { Button } from "flowbite-react";
+import { BsFiletypePdf } from "react-icons/bs";
 
 import "jspdf-autotable";
 
@@ -22,6 +24,8 @@ const CbcPDF = ({ patient }) => {
     setUrineTestData(urinedata);
     console.log(urinedata);
   };
+
+ 
 
  useEffect(() => {
   if (buttonClicked) {
@@ -50,18 +54,8 @@ const CbcPDF = ({ patient }) => {
       doc.text(`Name: ${patient.name}`, 10, 43);
       doc.text(`Age/Gender: ${patient.age} years / ${patient.gender}`, 10, 50);
       doc.text(`Ref. By: ${patient.refBy}`, 10, 57);
-      doc.text(
-        `Date: ${new Date(patient.date).toLocaleDateString("en-GB")}`,
-        155,
-        36
-      );
-      const formattedTime = new Date(
-        `2022-02-07T${patient.time}:00`
-      ).toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
-      });
+      doc.text(`Date: ${new Date(patient.date).toLocaleDateString("en-GB")}`, 155, 36);
+      const formattedTime = new Date(`2022-02-07T${patient.time}:00`).toLocaleTimeString("en-US", {hour: "2-digit", minute: "2-digit", hour12: true,});
       doc.text(`Time: ${formattedTime}`, 155, 43);
 
       doc.setFontSize(15);
@@ -74,12 +68,7 @@ const CbcPDF = ({ patient }) => {
         startY: 74,
         theme: "striped",
 
-        columnStyles: {
-          0: { cellWidth: 65 },
-          1: { cellWidth: 32 },
-          2: { cellWidth: 32 },
-          3: { cellWidth: 53 },
-        },
+        columnStyles: { 0: { cellWidth: 65 }, 1: { cellWidth: 32 }, 2: { cellWidth: 32 }, 3: { cellWidth: 53 },},
         styles: {
           fontSize: 12, // Set font size
           cellPadding: 1, // Set cell padding
@@ -111,19 +100,44 @@ const CbcPDF = ({ patient }) => {
     }
 
     if (urineTestData && urineTestData.quantity) {
-      if (cbcTestData) {
+     
         doc.addPage();
-      }
-      if(!cbcTestData.Hb){
+     
+      if(!cbcTestData || !cbcTestData.Hb){
         doc.deletePage(1)
       }
-      doc.text("Urine Analysis", 90, 66);
+      doc.addImage("/background-header.jpg", "JPEG", 2, 2, 206, 25);
+      // Draw a rectangle as a box
+      doc.roundedRect(5, 29, 200, 32, 2, 2); // (x, y, width, height)
 
-      // Generate PDF using autoTable and the HTML table
+      // Add text fields inside the box
+      doc.setFontSize(14);
+      doc.text(`Sr.No.: ${patient.serial}`, 10, 36);
+      doc.text(`Name: ${patient.name}`, 10, 43);
+      doc.text(`Age/Gender: ${patient.age} years / ${patient.gender}`, 10, 50);
+      doc.text(`Ref. By: ${patient.refBy}`, 10, 57);
+      doc.text(
+        `Date: ${new Date(patient.date).toLocaleDateString("en-GB")}`,
+        155,
+        36
+      );
+      const formattedTime = new Date(`2022-02-07T${patient.time}:00`).toLocaleTimeString("en-US", {hour: "2-digit", minute: "2-digit", hour12: true,});
+      doc.text(`Time: ${formattedTime}`, 155, 43);
+
+      doc.setFontSize(15);
+      doc.text("Urine Analysis", 90, 69);
+
       doc.autoTable({
         html: "#urine-table",
-        startY: 70,
-        columnStyles: { 0: { cellWidth: 40 }, 1: { cellWidth: 60 } },
+        startY: 72,
+        columnStyles: { 0: { cellWidth: 65 }, 1: { cellWidth: 32 }, 2: { cellWidth: 32 }, 3: { cellWidth: 53 },},
+        styles: {
+          fontSize: 12, // Set font size
+          cellPadding: 1, // Set cell padding
+          halign: "center",
+          valign: "middle",
+          minCellHeight: 8,
+        },
       });
     }
 
@@ -144,9 +158,13 @@ const CbcPDF = ({ patient }) => {
 
   return (
     <div>
-      <button type="button" onClick={generatePDF}>
-        Generate PDF
-      </button>
+     
+      <Button  color="gray"  className="rounded-l-none border-l-0 pl-0"
+       type="button" onClick={generatePDF}>
+        <BsFiletypePdf className="h-5 w-5"/>
+        
+      </Button>
+    
 
       <>
         {buttonClicked && cbcTestData && (

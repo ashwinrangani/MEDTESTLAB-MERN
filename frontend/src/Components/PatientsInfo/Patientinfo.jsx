@@ -1,11 +1,16 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, } from "react-hook-form";
 import { useDoctorList } from "../context/DrListContext";
 import CbcReport from "./Reports/CbcReport";
 import UrineReport from "./Reports/UrineReport";
 import { Button, Dropdown } from "flowbite-react";
+import { FaUserPlus } from "react-icons/fa6";
+import { MdClear } from "react-icons/md";
+import { MdOutlineNewLabel } from "react-icons/md";
+import { GrPrevious } from "react-icons/gr";
 import axios from "axios";
 import CbcPDF from "./Reports/CbcPDF";
+
 
 
 const PatientInfo = () => {
@@ -145,7 +150,11 @@ const handleBack = () => {
     try {
       const response = await axios.post('http://localhost:4000/addpatient', payload);
   
-      const { message, patient } = response.data;
+      const { error, message, patient } = response.data;
+      if(error){
+        window.alert('Patient already exists')
+      }
+      console.log(error)
       console.log(patient);
       setIndex(patient.serial)
         setSerial(patient.serial);
@@ -258,7 +267,7 @@ const handleBack = () => {
             {/* Buttons to toggle between forms on larger devices */}
             <div className="w-full md:w-[10%] lg:w-[10%]">
               <div className="hidden md:flex lg:flex flex-col-2 gap-2 items-end mr-0">
-                <Button
+                <Button 
                   gradientMonochrome="info"
                   className="mb-2 h-14 w-14"
                   onClick={() => showForm("cbc")}
@@ -274,40 +283,38 @@ const handleBack = () => {
                 </Button>
               </div>
             </div>
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              className="col-span-4 ml-1 bg-blue-500 text-white px-2 py-1 rounded-md"
-            > Add
-             
-            </button>
-            <button
-              type="button" // Change to type="button" to prevent form submission
-              onClick={newPatient}
-              className="col-span-4 ml-1 bg-blue-500 text-white px-2 py-1 rounded-md"
-            >
-              New
-            </button>
-            <button
-              type="button"
-              onClick={()=>reset()}
-              className="col-span-4 ml-1 bg-red-400 text-white px-2 py-1 rounded-md"
-
-             >
-              Clear Values
-            </button>
-            <button
+            <div className="container fixed bottom-1 md:-ml-12  w-full  flex justify-center items-center">
+      <Button.Group>
+            <Button color="gray" 
             type="button"
-            className="col-span-4 ml-1 bg-sky-400 text-white px-2 py-1 rounded-md"
             onClick={handleBack}
-            > Prev
-            </button>
-            <CbcPDF patient={patientData} />
+            > <GrPrevious className="mr-1 mt-0.5 h-3 w-3"/>
+            Pre </Button>
+            <Button color="gray"
+              type="submit"
+              ><FaUserPlus className="mr-2 h-4 w-4"/>Add
+              </Button>
+              <Button color="gray"
+              type="button"
+              onClick={()=>reset()}><MdClear className="mr-2 mt-0.5 h-4 w-4"/>
+              Clear
+            </Button>
+            <Button color="gray"
+              type="button" 
+              onClick={newPatient}
+             ><MdOutlineNewLabel className="mr-2 mt-0.5 h-4 w-4"/>
+             New
+            </Button>
+                   
+            <CbcPDF  patient={patientData} />
+            </Button.Group>
           </div>
-        </form>
+          </div>
+          
+       </form>
+       
       </div>
+      
     </div>
   );
 };
