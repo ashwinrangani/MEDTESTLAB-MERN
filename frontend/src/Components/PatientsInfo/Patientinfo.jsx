@@ -283,7 +283,7 @@ const handleBack = () => {
                 </Button>
               </div>
             </div>
-            <div className="container fixed bottom-1 md:-ml-12  w-full  flex justify-center items-center">
+            <div className="container fixed bottom-1 md:-ml-24   w-full  flex justify-center items-center">
       <Button.Group>
             <Button color="gray" 
             type="button"

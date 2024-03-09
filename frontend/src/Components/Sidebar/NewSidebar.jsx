@@ -72,10 +72,13 @@ const user = localStorage.getItem('userInfo');
                 <span>Doctor's List</span>
               </button>
             </Link>
+            <Link to='/accounts'>
             <button className='flex items-center w-full space-x-2 px-4 py-2 hover:bg-gray-700'>
               <HiShoppingBag className='w-5 h-5' />
               <span>Expenses</span>
             </button>
+            </Link>
+            
             <button className='flex items-center w-full space-x-2 px-4 py-2 hover:bg-gray-700'>
               <HiArrowSmRight className='w-5 h-5' />
               <span>Sign Out</span>

@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import NewSidebar from './Components/Sidebar/NewSidebar';
 import DrList from './Components/DrList/DrList';
 import { DoctorListProvider } from './Components/context/DrListContext';
+import Accounts from './Components/Accounts/Accounts';
 
 function App() {
   
@@ -29,6 +30,7 @@ function App() {
                 <Routes>
                 <Route path='/drlist' element={<DrList />} />
                   <Route path="/patients" element={<PatientInfo />} />
+                  <Route path='/accounts' element={<Accounts />} />
                   
                   {/* Add more routes for other pages inside the patients section */}
                   
