@@ -30,6 +30,7 @@ const patientSchema = new Schema({
     date: Date,
     time: String,
     refBy: String,
+    bill: Number,
     tests: [{
         testType: String,
         testData: Schema.Types.Mixed

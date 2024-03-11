@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import toast, { Toaster } from 'react-hot-toast';
 import { useForm, } from "react-hook-form";
 import { useDoctorList } from "../context/DrListContext";
 import CbcReport from "./Reports/CbcReport";
@@ -62,7 +63,7 @@ const PatientInfo = () => {
 
   const { doctorList } = useDoctorList();
 
-  const {register, handleSubmit, reset, watch,getValues, setValue, formState: { errors },  } = useForm();
+  const {register, handleSubmit, reset, setValue, formState: { errors },  } = useForm();
 
   //getting data based on serial numbers, previous button function
   const fetchPatientData = async(serial) => {
@@ -116,7 +117,7 @@ const handleBack = () => {
    const payload = {
     patientData: {
       serial: index, name: data.name, age: data.age,  gender: data.gender, address: data.address,
-      contact: data.contact, date: data.date, time: data.time, refBy: data.refBy,
+      contact: data.contact, date: data.date, time: data.time, refBy: data.refBy, bill: '',
         },
     tests: [
       {
@@ -152,13 +153,14 @@ const handleBack = () => {
   
       const { error, message, patient } = response.data;
       if(error){
-        window.alert('Patient already exists')
+       toast.error(error)
       }
       console.log(error)
       console.log(patient);
       setIndex(patient.serial)
         setSerial(patient.serial);
         setPatientData(patient); 
+        toast.success(message)
     } catch (error) {
       console.error(error);
     } 
@@ -314,7 +316,7 @@ const handleBack = () => {
        </form>
        
       </div>
-      
+      <Toaster position="top-right"/>
     </div>
   );
 };

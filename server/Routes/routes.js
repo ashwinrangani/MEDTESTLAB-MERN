@@ -7,6 +7,7 @@ import deletetDoctor from '../controllers/DeleteDoctor.js';
 import getLastPatient from '../controllers/getLastPatient.js';
 import getLastSerial from '../controllers/getLastSerial.js';
 import getPatientPages from '../controllers/getPatientPages.js';
+import billingAccount from '../controllers/billingAccount.js';
 
 const router = express.Router();
 
@@ -22,5 +23,6 @@ router.get('/', (req, res) => {
   router.post('/adddoctor', AddDoctor);
   router.get('/getdoctors', getDoctors);
   router.delete('/deletedoc/:_id', deletetDoctor);
+  router.put('/billupdate/:serial', billingAccount);
 
 export default router;

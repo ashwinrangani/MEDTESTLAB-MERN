@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import jsPDF from "jspdf";
+import QRCode from 'qrcode'
 import { Button } from "flowbite-react";
 import { BsFiletypePdf } from "react-icons/bs";
 
@@ -10,6 +11,28 @@ const CbcPDF = ({ patient }) => {
   const [cbcTestData, setCbcTestData] = useState(null);
   const [urineTestData, setUrineTestData] = useState(null);
   console.log(patient);
+
+  const generateQR = (patient) => {
+    const patientInfo = JSON.stringify({
+      serial: patient.serial,
+      name: patient.name,
+      age: patient.age,
+      gender: patient.gender,
+      refBy: patient.refBy,
+      date: new Date(patient.date).toLocaleDateString("en-GB"),
+      
+    });
+  
+    const canvas = document.createElement('canvas');
+    QRCode.toCanvas(canvas, patientInfo, (error) => {
+      if (error) {
+        console.error('Error generating QR code:', error);
+      }
+    });
+  
+    return canvas;
+  };
+
   const generatePDF = () => {
     setButtonClicked(true);
 
@@ -45,9 +68,15 @@ const CbcPDF = ({ patient }) => {
 
     if (cbcTestData && cbcTestData.Hb) {
       doc.addImage("/background-header.jpg", "JPEG", 2, 2, 206, 25);
-      // Draw a rectangle as a box
+      
       doc.roundedRect(5, 29, 200, 32, 2, 2); // (x, y, width, height)
 
+      //QR Code 
+      const qrCode = generateQR(patient);
+      const qrCodeDataURL = qrCode.toDataURL('image/png');
+      doc.addImage(qrCodeDataURL, 'PNG', 110, 30, 15, 15);
+      
+      
       // Add text fields inside the box
       doc.setFontSize(14);
       doc.text(`Sr.No.: ${patient.serial}`, 10, 36);
