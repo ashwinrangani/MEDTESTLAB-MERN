@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import Paginate from './Pagination';
 import axios from 'axios';
-import {  Button, Toast } from 'flowbite-react';
+import {  Button } from 'flowbite-react';
 import { MdUpdate } from "react-icons/md";
+import TodaysCollection from './Collection/TodaysCollection';
+import TotalCollection from './Collection/TotalCollection';
+import BillingByDoctor from './Collection/BillingByDoctor';
 
 const Accounts = () => {
   const [patientData, setPatientData] = useState(null);
@@ -57,11 +60,11 @@ setInput(newInputValues)
 }
 
   return (
-    <div className='md:ml-52 bg-gray-300 h-screen'>
-      <h1 className='text-center text-2xl font-display'>Accounts</h1>
-      <div className='mt-10 ml-2 mr-2 overflow-x-auto flex justify-center items-center'>
+    <div className='md:ml-52 bg-gray-200 h-full'>
+      <h1 className='text-center text-2xl font-display md:pt-2'>Accounts</h1>
+      <div className=' ml-2 mr-2 overflow-x-auto flex justify-center items-center'>
         {patientData && (
-          <table className='table-auto md:table-fixed lg:table-fixed border-slate-400 md:w-[78%]'>
+          <table className='md:mt-4 table-auto md:table-fixed lg:table-fixed border-slate-400 md:w-[78%]'>
             <thead>
               <tr className='bg-slate-200'>
                 <th className='border border-slate-800 w-[5%]'>Sr.</th>
@@ -114,6 +117,11 @@ setInput(newInputValues)
       </div>
       
         <Paginate currentPage={currentPage} onPageChange={onPageChange} />
+        <div className='flex gap-3 font-semibold'>
+          <TodaysCollection input={input} />
+          <TotalCollection input={input}/>
+        </div>
+        <BillingByDoctor input={input}/>
       <Toaster position="top-right" />
     </div>
   );
