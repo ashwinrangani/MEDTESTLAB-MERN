@@ -10,18 +10,18 @@ const getBillByDoctor = async (req, res) => {
 
        const query = {
         refBy: doctor,
-        date: { $gte: startDate, $lte: endDate } // Filter patients within the date range
+        date: { $gte: startDate, $lte: endDate } 
     };
         
         const referredPatient = await Patient.find(query);
         
         if (referredPatient.length > 0) {
-            // Calculate the total bill for today
+            
             const billTotal = referredPatient.reduce((total, patient) => total + patient.bill, 0);
 
-            res.status(200).json({ referBy: doctor, billTotal });
+            res.status(200).json({ patients: referredPatient, doctor, billTotal });
         } else {
-            res.status(404).json({ message: 'No patients reffered by the selected doctor' });
+            res.status(200).json({ patients: [], doctor, billTotal: 0 });
         }
     } catch (error) {
         console.error(error);

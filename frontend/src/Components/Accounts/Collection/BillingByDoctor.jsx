@@ -10,19 +10,38 @@ const BillingByDoctor = ({ input }) => {
   const [endDate, setEndDate] = useState('')
   const { doctorList } = useDoctorList();
 
-  useEffect(() => {
-    const getBillByDoctor = async () => {
-      try {
-        const response = await axios.get(`http://localhost:4000/billbydoctor/${doctor}?startDate=${startDate}&endDate=${endDate}`);
-        const { billTotal } = response.data;
-        
+  const getBillByDoctor = async () => {
+    try {
+      const response = await axios.get(`http://localhost:4000/billbydoctor/${doctor}?startDate=${startDate}&endDate=${endDate}`);
+      const { billTotal, message } = response.data;
+      const { patients } = response.data;
+      
+      console.log(patients);
+      
+      if (patients.length === 0) {
+        setTotalCollection(0);
+        if (message) {
+          // Display the error message
+          console.log(message)
+        }
+      } else {
         setTotalCollection(billTotal);
-      } catch (error) {
-        console.error(error);
       }
+    } catch (error) {
+      console.error(error);
+      
     }
+  };
+  
+  
+  useEffect(() => {
     getBillByDoctor();
-  }, [input, doctor, startDate, endDate]);
+  }, [input, startDate, endDate]);
+  
+  useEffect(() => {
+    getBillByDoctor();
+  }, [doctor]);
+  
 
   const handleDoctorSelect = (doctorName) => {
     setDoctor(doctorName);    

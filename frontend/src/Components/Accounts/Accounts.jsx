@@ -19,7 +19,7 @@ const Accounts = () => {
         const response = await axios.get(`http://localhost:4000/patients?page=${currentPage}&limit=10`);
         const { patients } = response.data;
         setPatientData(patients);
-        const initialInputValue = patients.map((patient) => patient.bill)
+        const initialInputValue = patients.map((patient) => patient.bill !== null? patient.bill : '')
         setInput(initialInputValue)
         console.log(patients);
       } catch (error) {

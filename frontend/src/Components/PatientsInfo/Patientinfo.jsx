@@ -63,7 +63,7 @@ const PatientInfo = () => {
 
   const { doctorList } = useDoctorList();
 
-  const {register, handleSubmit, reset, setValue, formState: { errors },  } = useForm();
+  const {register, handleSubmit, reset, setValue,trigger, formState: { errors },  } = useForm();
 
   //getting data based on serial numbers, previous button function
   const fetchPatientData = async(serial) => {
@@ -260,8 +260,8 @@ const handleBack = () => {
             </div>
             <div className="w-full md:w-[90%] lg:w-[90%] pr-4">
               <div className="flex flex-col w-full">
-                {visibleForm === "cbc" && <CbcReport register={register}  />}
-                {visibleForm === "urine" && <UrineReport register={register} />}
+                {visibleForm === "cbc" && <CbcReport register={register} trigger={trigger}  />}
+                {visibleForm === "urine" && <UrineReport register={register} trigger={trigger}/>}
               </div>
               
             </div>
