@@ -19,7 +19,7 @@ const PatientInfo = () => {
   const [index, setIndex] = useState(null);
    const [serial, setSerial] = useState(null);
    const[patientData, setPatientData]= useState({})
-   
+   const base_url = import.meta.env.VITE_BASE_URL
   
   const user = localStorage.getItem("userInfo");
   if (!user) {
@@ -29,7 +29,7 @@ const PatientInfo = () => {
   useEffect(() => {
     const fetchLastPatient = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/getlastserial`);
+        const response = await axios.get(`${base_url}/getlastserial`);
         console.log('Last patient response:', response.data);
         const { serial } = response.data;
   
@@ -63,12 +63,19 @@ const PatientInfo = () => {
 
   const { doctorList } = useDoctorList();
 
-  const {register, handleSubmit, reset, setValue,trigger, formState: { errors },  } = useForm();
+  const {register, handleSubmit, reset, setValue, setFocus, formState: { errors },  } = useForm();
+
+  const handleKeyPress = (event, nextFieldName) =>{
+      if(event.key === 'Enter'){
+      event.preventDefault();
+      setFocus(nextFieldName)
+    }
+  }
 
   //getting data based on serial numbers, previous button function
   const fetchPatientData = async(serial) => {
     try {
-      const response = await axios.get(`http://localhost:4000/getlastpatient/${serial}`)
+      const response = await axios.get(`${base_url}/getlastpatient/${serial}`)
       const { patient } = response.data;
       setPatientData(patient)
       const fotmatteDate = new Date(patient.date).toISOString().split('T')[0];
@@ -149,13 +156,13 @@ const handleBack = () => {
   };
    
     try {
-      const response = await axios.post('http://localhost:4000/addpatient', payload);
+      const response = await axios.post(`${base_url}/addpatient`, payload);
   
       const { error, message, patient } = response.data;
       if(error){
        toast.error(error)
       }
-      console.log(error)
+      
       console.log(patient);
       setIndex(patient.serial)
         setSerial(patient.serial);
@@ -175,7 +182,7 @@ const handleBack = () => {
 
  
   return (
-    <div className={`md:ml-44 ${visibleForm ? 'h-full' : 'h-screen'} bg-sky-100`}>
+    <div className={`md:ml-44 mb-10 ${visibleForm ? 'h-full' : 'h-screen'} bg-sky-100`}>
       <h1 className="text-2xl pt-2 text-center font-display">
         Patient Information
       </h1>
@@ -193,16 +200,19 @@ const handleBack = () => {
             className=" w-80 px-2 py-1 ml-1 border rounded-md bg-gray-50"
             type="text"
             placeholder="Name"
+            onKeyDown={(e) => handleKeyPress(e, 'age')}
             {...register("name", { required: true })}
           />
           <input
             className="w-24 px-2 py-1 ml-1 border rounded-md bg-gray-50"
             type="number"
             placeholder="Age"
+            onKeyDown={(e) => handleKeyPress(e, 'gender')}
             {...register("age", { required: true })}
           />
           <select
             className="w-32 px-2 py-1 mt-1 ml-1  border rounded-md bg-gray-50"
+            onKeyDown={(e) => handleKeyPress(e, 'address')}
             {...register("gender", { required: true })}
           >
             <option value="Male">Male</option>
@@ -212,18 +222,21 @@ const handleBack = () => {
             className="w-64 px-2 py-1 ml-1 mt-1 border rounded-md bg-gray-50"
             type="text"
             placeholder="Address"
+            onKeyDown={(e) => handleKeyPress(e, 'contact')}
             {...register("address", { required: true })}
           />
           <input
             className="w-48 px-2 py-1 ml-1 border rounded-md bg-gray-50"
             type="text"
             placeholder="Mobile number"
+            onKeyDown={(e) => handleKeyPress(e, 'refBy')}
             {...register("contact", { required: true })}
           />
 
           <select
             className="w-54 px-2 py-1 mt-1 ml-1 border rounded-md bg-gray-50"
             {...register("refBy")}
+            onKeyDown={(e) => handleKeyPress(e, 'date')}
             
           >
             <option value="" disabled selected>Select a doctor</option>
@@ -237,12 +250,14 @@ const handleBack = () => {
             className="px-2 w-36 py-1 ml-1 mt-1 border rounded-md bg-gray-50"
             type="date"
             placeholder="Date"
+            onKeyDown={(e) => handleKeyPress(e, 'time')}
             {...register("date", {})}
           />
           <input
             className="w-40 px-2 py-1 ml-1 mt-1 border rounded-md bg-gray-50"
             type="time"
             placeholder="Time"
+            onKeyDown={(e) => handleKeyPress(e, '')}
             {...register("time", {})}
           />
 
@@ -260,12 +275,13 @@ const handleBack = () => {
             </div>
             <div className="w-full md:w-[90%] lg:w-[90%] pr-4">
               <div className="flex flex-col w-full">
-                {visibleForm === "cbc" && <CbcReport register={register} trigger={trigger}  />}
-                {visibleForm === "urine" && <UrineReport register={register} trigger={trigger}/>}
+                {visibleForm === "cbc" && <CbcReport register={register}  setFocus={setFocus}  />}
+                {visibleForm === "urine" && <UrineReport register={register}  setFocus={setFocus}/>}
+                
               </div>
-              
+             
             </div>
-
+            
             {/* Buttons to toggle between forms on larger devices */}
             <div className="w-full md:w-[10%] lg:w-[10%]">
               <div className="hidden md:flex lg:flex flex-col-2 gap-2 items-end mr-0">
@@ -284,24 +300,26 @@ const handleBack = () => {
                   Urine Test
                 </Button>
               </div>
+              <span className="font-semibold ">More Tests will be here..</span>
             </div>
-            <div className="container fixed bottom-1 md:-ml-24   w-full  flex justify-center items-center">
-      <Button.Group>
-            <Button color="gray" 
+            <div className="container fixed md:-ml-8 bottom-0 bg-sky-100 w-full flex items-center justify-center">
+      <div className='md:-ml-40'>
+      <Button.Group >
+            <Button gradientMonochrome="info" 
             type="button"
             onClick={handleBack}
             > <GrPrevious className="mr-1 mt-0.5 h-3 w-3"/>
             Pre </Button>
-            <Button color="gray"
+            <Button gradientMonochrome="info"
               type="submit"
               ><FaUserPlus className="mr-2 h-4 w-4"/>Add
               </Button>
-              <Button color="gray"
+              <Button gradientMonochrome="info"
               type="button"
               onClick={()=>reset()}><MdClear className="mr-2 mt-0.5 h-4 w-4"/>
               Clear
             </Button>
-            <Button color="gray"
+            <Button gradientMonochrome="info"
               type="button" 
               onClick={newPatient}
              ><MdOutlineNewLabel className="mr-2 mt-0.5 h-4 w-4"/>
@@ -310,6 +328,7 @@ const handleBack = () => {
                    
             <CbcPDF  patient={patientData} />
             </Button.Group>
+            </div>
           </div>
           </div>
           

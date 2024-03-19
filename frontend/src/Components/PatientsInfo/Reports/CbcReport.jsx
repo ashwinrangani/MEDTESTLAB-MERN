@@ -1,10 +1,16 @@
 import React from 'react';
 
 
-const CbcReport = ({ register }) => {
-
+const CbcReport = ({ register, setFocus }) => {
+  
+  const handleKeyPress = (event, nextFieldName) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      setFocus(nextFieldName); // Set focus on the next field by its name
+    }
+  };
   return (
-    <div className='h-full'>
+    <div className='h-full mb-2'>
       <h1 className='text-center font-display text-xl mb-2'>HAEMOGRAM</h1>
       <div className="overflow-x-auto h-full">
         <table 
@@ -29,7 +35,7 @@ const CbcReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'RBC')}
                   {...register('Hb', { required: true })}
                 />
               </td>
@@ -54,7 +60,7 @@ const CbcReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'WBC')}
                   {...register('RBC')}
                 />
               </td>
@@ -79,7 +85,7 @@ const CbcReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'neutrophils')}
                   {...register('WBC')}
                 />
               </td>
@@ -107,7 +113,7 @@ const CbcReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'lymphocytes')}
                   {...register('neutrophils')}
                 />
               </td>
@@ -132,7 +138,7 @@ const CbcReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'eosinophils')}
                   {...register('lymphocytes')}
                 />
               </td>
@@ -157,7 +163,7 @@ const CbcReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'monocytes')}
                   {...register('eosinophils')}
                 />
               </td>
@@ -182,7 +188,7 @@ const CbcReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'basophils')}
                   {...register('monocytes')}
                 />
               </td>
@@ -207,7 +213,7 @@ const CbcReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'pcv')}
                   {...register('basophils')}
                 />
               </td>
@@ -235,7 +241,7 @@ const CbcReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'mcv')}
                   {...register('pcv')}
                 />
               </td>
@@ -260,6 +266,7 @@ const CbcReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
+                  onKeyDown={(e) => handleKeyPress(e, 'mch')}
                   {...register('mcv')}
                 />
               </td>
@@ -284,7 +291,7 @@ const CbcReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'mchc')}
                   {...register('mch')}
                 />
               </td>
@@ -309,7 +316,7 @@ const CbcReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'rdw')}
                   {...register('mchc')}
                 />
               </td>
@@ -334,7 +341,7 @@ const CbcReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'platelets')}
                   {...register('rdw')}
                 />
               </td>
@@ -359,7 +366,7 @@ const CbcReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'mp')}
                   {...register('platelets')}
                 />
               </td>
@@ -387,7 +394,7 @@ const CbcReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'serology')}
                   {...register('mp')}
                 />
               </td>

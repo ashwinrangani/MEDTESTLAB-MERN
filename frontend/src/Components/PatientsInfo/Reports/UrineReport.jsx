@@ -1,9 +1,16 @@
 import React from 'react'
 
-const UrineReport = ({ register }) => {
+const UrineReport = ({ register, setFocus }) => {
+
+  const handleKeyPress = (event, nextFieldName) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      setFocus(nextFieldName); // Set focus on the next field by its name
+    }
+  };
   return (
    
-    <div className='h-full'>
+    <div className='h-full mb-2'>
       <h1 className='text-center font-display text-xl mb-2'>URINE ANALYSIS</h1>
       <div className="overflow-x-auto h-full">
         <table className="border-separate border-spacing-2 border table-auto md:table-fixed lg:table-fixed border-slate-400 w-full">
@@ -27,6 +34,7 @@ const UrineReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
+                  onKeyDown={(e) => handleKeyPress(e, 'urineColor')}
                   required
                   {...register('quantity', { required: true })}
                 />
@@ -43,7 +51,7 @@ const UrineReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'clarity')}
                   {...register('urineColor')}
                 />
               </td>
@@ -56,7 +64,7 @@ const UrineReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'urineph')}
                   {...register('clarity')}
                 />
               </td>
@@ -69,7 +77,7 @@ const UrineReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'spgr')}
                   {...register('urineph')}
                 />
               </td>
@@ -92,7 +100,7 @@ const UrineReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'albumin')}
                   {...register('spgr')}
                 />
               </td>
@@ -118,7 +126,7 @@ const UrineReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'sugar')}
                   {...register('albumin')}
                 />
               </td>
@@ -137,7 +145,7 @@ const UrineReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'bilesalts')}
                   {...register('sugar')}
                 />
               </td>
@@ -156,7 +164,7 @@ const UrineReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'bilepigments')}
                   {...register('bilesalts')}
                 />
               </td>
@@ -175,7 +183,7 @@ const UrineReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'urobilinogen')}
                   {...register('bilepigments')}
                 />
               </td>
@@ -194,7 +202,7 @@ const UrineReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'urineblood')}
                   {...register('urobilinogen')}
                 />
               </td>
@@ -213,7 +221,7 @@ const UrineReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'acetone')}
                   {...register('urineblood')}
                 />
               </td>
@@ -232,7 +240,7 @@ const UrineReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'leucocytes')}
                   {...register('acetone')}
                 />
               </td>
@@ -251,7 +259,7 @@ const UrineReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'nitrite')}
                   {...register('leucocytes')}
                 />
               </td>
@@ -270,7 +278,7 @@ const UrineReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'puscells')}
                   {...register('nitrite')}
                 />
               </td>
@@ -293,7 +301,7 @@ const UrineReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'redcells')}
                   {...register('puscells')}
                 />
               </td>
@@ -309,7 +317,7 @@ const UrineReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'epithelialcells')}
                   {...register('redcells')}
                 />
               </td>
@@ -322,7 +330,7 @@ const UrineReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'casts')}
                   {...register('epithelialcells')}
                 />
               </td>
@@ -338,7 +346,7 @@ const UrineReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'crystals')}
                   {...register('casts')}
                 />
               </td>
@@ -351,7 +359,7 @@ const UrineReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'amorphous')}
                   {...register('crystals')}
                 />
               </td>
@@ -364,7 +372,7 @@ const UrineReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, 'bacteria')}
                   {...register('amorphous')}
                 />
               </td>
@@ -377,7 +385,7 @@ const UrineReport = ({ register }) => {
                 <input
                   className='p-1 w-full text-center'
                   type="text"
-                  
+                  onKeyDown={(e) => handleKeyPress(e, '')}
                   {...register('bacteria')}
                 />
               </td>

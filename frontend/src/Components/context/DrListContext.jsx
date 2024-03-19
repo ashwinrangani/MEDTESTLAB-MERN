@@ -4,6 +4,8 @@ import axios from 'axios';
 
 const DoctorListContext = createContext();
 
+const base_url = import.meta.env.VITE_BASE_URL
+
 export const useDoctorList = () => {
   return useContext(DoctorListContext);
 };
@@ -14,7 +16,7 @@ export const DoctorListProvider = ({ children }) => {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/getdoctors");
+        const response = await axios.get(`${base_url}/getdoctors`);
         setDoctorList(response.data.doctors);
         console.log("Doctor's list fetched:", doctorList); // Log here
       } catch (error) {

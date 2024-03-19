@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CgMenuRound } from "react-icons/cg";
 import { FaMicroscope, FaWindowClose } from 'react-icons/fa';
 import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiViewBoards } from 'react-icons/hi';
@@ -24,6 +24,11 @@ const user = localStorage.getItem('userInfo');
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarVisible);
   };
+  const navigate = useNavigate()
+  const handleSignOut = () => {
+    localStorage.removeItem('userInfo');
+    navigate('/')
+  }
 
   return (
     <>
@@ -62,10 +67,10 @@ const user = localStorage.getItem('userInfo');
                 <span>Generate Reports</span>
               </button>
             </Link>
-            <button className='flex items-center w-full space-x-2 px-4 py-2 hover:bg-gray-700'>
+            {/* <button className='flex items-center w-full space-x-2 px-4 py-2 hover:bg-gray-700'>
               <HiViewBoards className='w-5 h-5' />
               <span>Test information</span>
-            </button>
+            </button> */}
             <Link to='/drlist'>
               <button className='flex items-center w-full space-x-2 px-4 py-2 hover:bg-gray-700'>
                 <HiInbox className='w-5 h-5' />
@@ -79,7 +84,8 @@ const user = localStorage.getItem('userInfo');
             </button>
             </Link>
             
-            <button className='flex items-center w-full space-x-2 px-4 py-2 hover:bg-gray-700'>
+            <button onClick={handleSignOut}
+             className='flex items-center w-full space-x-2 px-4 py-2 hover:bg-gray-700'>
               <HiArrowSmRight className='w-5 h-5' />
               <span>Sign Out</span>
             </button>

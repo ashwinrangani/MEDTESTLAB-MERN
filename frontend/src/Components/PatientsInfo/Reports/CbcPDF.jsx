@@ -188,9 +188,9 @@ const CbcPDF = ({ patient }) => {
   return (
     <div>
      
-      <Button  color="gray"  className="rounded-l-none border-l-0 pl-0"
+      <Button  gradientMonochrome="info"  className="rounded-l-none border-l-0 pl-0"
        type="button" onClick={generatePDF}>
-        <BsFiletypePdf className="h-5 w-5"/>
+        <BsFiletypePdf className="h-6 w-8"/>
         
       </Button>
     

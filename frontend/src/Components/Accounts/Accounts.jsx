@@ -12,11 +12,17 @@ const Accounts = () => {
   const [patientData, setPatientData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [input, setInput] = useState([])
+  const base_url = import.meta.env.VITE_BASE_URL
+
+  const user = localStorage.getItem("userInfo");
+  if (!user) {
+    return null;
+  }
 
   useEffect(() => {
     const getPatients = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/patients?page=${currentPage}&limit=10`);
+        const response = await axios.get(`${base_url}/patients?page=${currentPage}&limit=10`);
         const { patients } = response.data;
         setPatientData(patients);
         const initialInputValue = patients.map((patient) => patient.bill !== null? patient.bill : '')
@@ -33,7 +39,7 @@ const Accounts = () => {
   const updatePatient = async (serial, updatedValue, index) => {
     
     try {
-      const response = await axios.put(`http://localhost:4000/billupdate/${serial}`, { input: updatedValue });
+      const response = await axios.put(`${base_url}/billupdate/${serial}`, { input: updatedValue });
       const { message } = response.data;
       console.log(message);
      toast.success(message)

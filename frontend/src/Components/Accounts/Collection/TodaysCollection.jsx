@@ -6,6 +6,8 @@ const TodaysCollection = ({ input }) => {
     const [date, setDate] = useState('');
     const [todayTotal, setTodayTotal] = useState(0);
 
+    const base_url = import.meta.env.VITE_BASE_URL
+
     useEffect(() => {
         const today = new Date().toLocaleDateString('en-IN', {day: '2-digit', month: '2-digit', year: 'numeric'})
         setDate(today);
@@ -14,7 +16,7 @@ const TodaysCollection = ({ input }) => {
     const getTodaysCollection = async () => {
     
         try {
-        const response = await axios.get('http://localhost:4000/todays-collection');
+        const response = await axios.get(`${base_url}/todays-collection`);
         const { todaysTotal } = response.data
         setTodayTotal(todaysTotal);
         
