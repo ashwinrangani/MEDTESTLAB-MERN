@@ -55,7 +55,7 @@ const BillingByDoctor = ({ input }) => {
   }
 
   return (
-    <div className='flex items-center gap-2 bottom-0 ml-1 mt-2 mb-1 font-semibold'>
+    <div className='flex flex-col md:flex-row justify-center items-center md:justify-start gap-2 bottom-0 ml-1 mt-2 mb-1 font-semibold'>
       <Dropdown label="Doctor" size="sm">
         {doctorList &&
           doctorList.map((doctor) => (

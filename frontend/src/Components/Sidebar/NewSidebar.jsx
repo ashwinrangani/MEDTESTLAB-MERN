@@ -4,6 +4,8 @@ import { CgMenuRound } from "react-icons/cg";
 import { FaMicroscope, FaWindowClose } from 'react-icons/fa';
 import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiViewBoards } from 'react-icons/hi';
 import { Button } from 'flowbite-react'
+import Clock from './Clock';
+import Weather from './Weather';
 
 
 function NewSidebar() {
@@ -90,7 +92,13 @@ const user = localStorage.getItem('userInfo');
               <span>Sign Out</span>
             </button>
           </div>
+          <div className='mt-40 ml-4'>
+          <Clock />
+          <Weather />
+          </div>
+          
         </div>
+        
       </div>
     </>
   );

@@ -34,8 +34,7 @@ const DrList = () => {
         const response = await axios.post(`${base_url}/adddoctor`, {
           name: input,
         });
-        console.log(response.data)
-
+        
         setNames((prev) => [...prev, response.data.name]);
         setInput("");
       } catch (error) {

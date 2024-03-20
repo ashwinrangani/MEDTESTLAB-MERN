@@ -27,7 +27,7 @@ const Accounts = () => {
         setPatientData(patients);
         const initialInputValue = patients.map((patient) => patient.bill !== null? patient.bill : '')
         setInput(initialInputValue)
-        console.log(patients);
+        
       } catch (error) {
         console.error(error);
       }
@@ -66,7 +66,7 @@ setInput(newInputValues)
 }
 
   return (
-    <div className='md:ml-52 bg-gray-200 h-full'>
+    <div className='md:ml-52 bg-sky-100 h-full'>
       <h1 className='text-center text-2xl font-display md:pt-2'>Accounts</h1>
       <div className=' ml-2 mr-2 overflow-x-auto flex justify-center items-center'>
         {patientData && (
@@ -123,11 +123,12 @@ setInput(newInputValues)
       </div>
       
         <Paginate currentPage={currentPage} onPageChange={onPageChange} />
-        <div className='flex gap-3 font-semibold'>
+        
           <TodaysCollection input={input} />
           <TotalCollection input={input}/>
-        </div>
-        <BillingByDoctor input={input}/>
+          <BillingByDoctor input={input}/>
+        
+        
       <Toaster position="top-right" />
     </div>
   );
