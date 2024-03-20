@@ -14,9 +14,6 @@ import getBillByDoctor from '../controllers/getBillByDoctor.js';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.send('Server ok!')
-  })
   
   router.get('/getlastpatient/:serial', getLastPatient)
   router.get('/getlastserial', getLastSerial)
