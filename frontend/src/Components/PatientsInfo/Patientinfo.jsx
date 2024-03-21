@@ -8,7 +8,7 @@ import { Button, Dropdown } from "flowbite-react";
 import { FaUserPlus } from "react-icons/fa6";
 import { MdClear } from "react-icons/md";
 import { MdOutlineNewLabel } from "react-icons/md";
-import { GrPrevious } from "react-icons/gr";
+import { GrPrevious, GrNext } from "react-icons/gr";
 import axios from "axios";
 import CbcPDF from "./Reports/CbcPDF";
 
@@ -35,7 +35,7 @@ const PatientInfo = () => {
   
         if (serial) {
           setSerial(serial)
-          setIndex(serial);
+          setIndex(serial+1);
           newPatient() //this will increment the serial on first mount
         } else {
           setIndex(1);
@@ -116,6 +116,13 @@ const handleBack = () => {
     setIndex(prevSerial);
   }
 };
+const handleNext = () => {
+  const nextSerial = (Number(index) + 1);
+  if(nextSerial <= serial) {
+    fetchPatientData(nextSerial);
+    setIndex(nextSerial)
+  }
+}
  
 
 // submitting a patient to db
@@ -310,6 +317,11 @@ const handleBack = () => {
             onClick={handleBack}
             > <GrPrevious className="mr-1 mt-0.5 h-3 w-3"/>
             Pre </Button>
+            <Button gradientMonochrome="info" 
+            type="button"
+            onClick={handleNext}
+            > <GrNext className="mr-1 mt-0.5 h-3 w-3"/>
+            Next </Button>
             <Button gradientMonochrome="info"
               type="submit"
               ><FaUserPlus className="mr-2 h-4 w-4"/>Add
