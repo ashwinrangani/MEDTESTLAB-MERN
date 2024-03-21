@@ -13,7 +13,9 @@ import getTotalCollection from '../controllers/getTotalCollection.js';
 import getBillByDoctor from '../controllers/getBillByDoctor.js';
 
 const router = express.Router();
-
+router.get('/', (req,res) => {
+  res.json({message: 'Server Ok'})
+})
 
   router.get('/getlastpatient/:serial', getLastPatient)
   router.get('/getlastserial', getLastSerial)
