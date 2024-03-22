@@ -14,11 +14,13 @@ import CbcPDF from "./Reports/CbcPDF";
 
 
 
+
 const PatientInfo = () => {
   const [visibleForm, setVisibleForm] = useState('');
   const [index, setIndex] = useState(null);
    const [serial, setSerial] = useState(null);
    const[patientData, setPatientData]= useState({})
+   const [isProcessing, setIsProcessing] = useState(false);
    const base_url = import.meta.env.VITE_BASE_URL
   
   const user = localStorage.getItem("userInfo");
@@ -52,7 +54,7 @@ const PatientInfo = () => {
   const newPatient = () => {
     if (serial) {
       const newSerial = serial + 1;
-      setIndex(newSerial);
+      setIndex(newSerial);      
       reset(); 
     } else {
       console.error('Patient data not available.');
@@ -127,7 +129,7 @@ const handleNext = () => {
 
 // submitting a patient to db
   const onSubmit = async (data) => {
-   
+    setIsProcessing(true);
    const payload = {
     patientData: {
       serial: index, name: data.name, age: data.age,  gender: data.gender, address: data.address,
@@ -177,7 +179,9 @@ const handleNext = () => {
         toast.success(message)
     } catch (error) {
       console.error(error);
-    } 
+    } finally {
+      setIsProcessing(false)
+    }
   };
   
 
@@ -270,13 +274,16 @@ const handleNext = () => {
 
           <div className="flex flex-col mt-6 md:border-t-4 border-red-400 pt-4 md:flex-row md:mr-10 lg:mr-10">
             {/* Buttons for smaller devices (hidden on larger devices) */}
-            <div className="w-full flex gap-1 md:hidden lg:hidden">
+            <div className="w-full flex gap-1 ml-1 md:hidden lg:hidden">
               <Dropdown label="Select Test">
                 <Dropdown.Item onClick={() => showForm("cbc")}>
                   Blood Test
                 </Dropdown.Item>
                 <Dropdown.Item onClick={() => showForm("urine")}>
                   Urine Test
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  More Tests will be available soon
                 </Dropdown.Item>
               </Dropdown>
             </div>
@@ -307,34 +314,36 @@ const handleNext = () => {
                   Urine Test
                 </Button>
               </div>
-              <span className="font-semibold ">More Tests will be here..</span>
+              <span className="font-semibold  ">More Tests will be here..</span>
             </div>
             <div className="container fixed md:-ml-8 bottom-0 bg-sky-100 w-full flex items-center justify-center">
       <div className='md:-ml-40'>
-      <Button.Group >
-            <Button gradientMonochrome="info" 
+      <Button.Group>
+            <Button gradientMonochrome="info" size="xs"
             type="button"
             onClick={handleBack}
-            > <GrPrevious className="mr-1 mt-0.5 h-3 w-3"/>
+            > <GrPrevious className="mr-1 mt-0.5 h-3 w-4"/>
             Pre </Button>
-            <Button gradientMonochrome="info" 
+            <Button gradientMonochrome="info" size="xs"
             type="button"
             onClick={handleNext}
             > <GrNext className="mr-1 mt-0.5 h-3 w-3"/>
             Next </Button>
-            <Button gradientMonochrome="info"
+            <Button gradientMonochrome="info" size="xs"
               type="submit"
-              ><FaUserPlus className="mr-2 h-4 w-4"/>Add
+              isProcessing={isProcessing}
+              disabled={isProcessing}
+              ><FaUserPlus className="mr-1 h-4 w-4"/>Add
               </Button>
-              <Button gradientMonochrome="info"
+              <Button gradientMonochrome="info" size="xs"
               type="button"
-              onClick={()=>reset()}><MdClear className="mr-2 mt-0.5 h-4 w-4"/>
+              onClick={()=>reset()}><MdClear className="mr-1 mt-0.5 h-4 w-4"/>
               Clear
             </Button>
-            <Button gradientMonochrome="info"
+            <Button gradientMonochrome="info" size="xs"
               type="button" 
               onClick={newPatient}
-             ><MdOutlineNewLabel className="mr-2 mt-0.5 h-4 w-4"/>
+             ><MdOutlineNewLabel className="mr-1 mt-0.5 h-4 w-4"/>
              New
             </Button>
                    

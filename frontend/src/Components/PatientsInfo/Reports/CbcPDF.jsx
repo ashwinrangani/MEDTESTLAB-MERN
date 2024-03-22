@@ -101,7 +101,7 @@ const CbcPDF = ({ patient }) => {
         styles: {
           fontSize: 12, // Set font size
           cellPadding: 1, // Set cell padding
-          halign: "center",
+          halign: "left",
           valign: "middle",
           minCellHeight: 9,
         },
@@ -188,12 +188,12 @@ const CbcPDF = ({ patient }) => {
   return (
     <div>
      
-      <Button  gradientMonochrome="info"  className="rounded-l-none border-l-0 pl-0"
+      <Button  gradientMonochrome="info" size="md"  className="rounded-l-none border-l-0 pl-0"
        type="button" onClick={generatePDF}>
-        <BsFiletypePdf className="h-6 w-8"/>
+        <BsFiletypePdf className="h-6 w-6"/>
         
       </Button>
-    
+      
 
       <>
         {buttonClicked && cbcTestData && (
