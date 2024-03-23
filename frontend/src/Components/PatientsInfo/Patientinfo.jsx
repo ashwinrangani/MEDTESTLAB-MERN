@@ -199,7 +199,7 @@ const handleNext = () => {
       </h1>
       <div className="md:ml-16 sm:ml-2 mt-4">
         <form onSubmit={handleSubmit(onSubmit)}>
-       {/* <GetLastPatient onLastSerialFetched={handleLastSerialFetched} /> */}
+       
           <input
             className="w-20 px-2 py-1 ml-1 border rounded-md bg-gray-50"
             type="number"
@@ -237,7 +237,7 @@ const handleNext = () => {
             {...register("address", { required: true })}
           />
           <input
-            className="w-48 px-2 py-1 ml-1 border rounded-md bg-gray-50"
+            className="w-48 px-2 py-1 ml-1 mt-1 border rounded-md bg-gray-50"
             type="text"
             placeholder="Mobile number"
             onKeyDown={(e) => handleKeyPress(e, 'refBy')}
@@ -274,7 +274,7 @@ const handleNext = () => {
 
           <div className="flex flex-col mt-6 md:border-t-4 border-red-400 pt-4 md:flex-row md:mr-10 lg:mr-10">
             {/* Buttons for smaller devices (hidden on larger devices) */}
-            <div className="w-full flex gap-1 ml-1 md:hidden lg:hidden">
+            <div className="w-full flex gap-1 ml-1 mb-2 md:hidden lg:hidden">
               <Dropdown label="Select Test">
                 <Dropdown.Item onClick={() => showForm("cbc")}>
                   Blood Test
@@ -314,7 +314,8 @@ const handleNext = () => {
                   Urine Test
                 </Button>
               </div>
-              <span className="font-semibold  ">More Tests will be here..</span>
+              <div className="hidden md:block lg:block"><span className="font-semibold ">More Tests will be here..</span></div>
+              
             </div>
             <div className="container fixed md:-ml-8 bottom-0 bg-sky-100 w-full flex items-center justify-center">
       <div className='md:-ml-40'>
