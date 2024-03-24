@@ -2,22 +2,22 @@ import React from 'react';
 
 const Dashboard = () => {
   return (
-    <div className='ml-52 h-full flex flex-col justify-center items-center'>
-      <h1 className='mt-20 text-4xl font-display'>LabCare</h1>
-      <p className='mt-1 font-medium'>Your Pathology Laboratory Management Solution</p>
-      <div className="max-w-lg mx-auto mt-6 text-lg text-center">
-        <h2 className="text-2xl font-semibold mb-2">Features:</h2>
-        <ul className="list-disc list-item">
-          <li>Instant Medical Report Generation</li>
-          <li>Patient Data Management</li>
-          <li>Doctor Referral Tracking</li>
-          <li>Payment Management</li>
+    <div className="mx-4 sm:mx-0 sm:ml-52 h-screen flex flex-col justify-center items-center bg-sky-50">
+      <h1 className="mt-10 text-3xl font-bold text-center text-gray-900">Welcome to LabCare</h1>
+      <p className="mt-2 text-lg font-medium text-center text-gray-700">Your Pathology Laboratory Management Solution</p>
+      <div className="max-w-md w-full mx-auto mt-8 bg-white p-4 sm:p-6 rounded-lg shadow-lg">
+        <h2 className="text-xl font-semibold mb-3 text-gray-900">Features:</h2>
+        <ul className="list-disc pl-5 mb-4">
+          <li className="mb-2">Instant Medical Report Generation</li>
+          <li className="mb-2">Patient Data Management</li>
+          <li className="mb-2">Doctor Referral Tracking</li>
+          <li className="mb-2">Payment Management</li>
         </ul>
-        <p className="mt-4">To get started:</p>
-        <ol className="list-decimal pl-6">
-          <li>Log in to your LabCare account.</li>
-          <li>Create or select a patient record to generate a medical report.</li>
-          <li>Manage doctor referrals and track payments from the dashboard.</li>
+        <p className="mb-4">To get started:</p>
+        <ol className="list-disc pl-5">
+          <li className="mb-2">Log in to your LabCare account.</li>
+          <li className="mb-2">Create or select a patient record to generate a medical report.</li>
+          <li className="mb-2">Manage doctor referrals and track payments from the dashboard.</li>
         </ol>
       </div>
     </div>
