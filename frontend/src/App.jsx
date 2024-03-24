@@ -6,6 +6,7 @@ import NewSidebar from './Components/Sidebar/NewSidebar';
 import DrList from './Components/DrList/DrList';
 import { DoctorListProvider } from './Components/context/DrListContext';
 import Accounts from './Components/Accounts/Accounts';
+import Dashboard from './Components/Dashboard/Dashboard';
 
 function App() {
   
@@ -28,12 +29,11 @@ function App() {
               <NewSidebar />
               <DoctorListProvider>
                 <Routes>
-                <Route path='/drlist' element={<DrList />} />
+                  <Route path='/dashboard' element={<Dashboard />} />
+                  <Route path='/drlist' element={<DrList />} />
                   <Route path="/patients" element={<PatientInfo />} />
                   <Route path='/accounts' element={<Accounts />} />
-                  
-                  {/* Add more routes for other pages inside the patients section */}
-                  
+                                   
                 </Routes>
                 </DoctorListProvider>
             </>
