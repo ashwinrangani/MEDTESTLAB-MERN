@@ -208,7 +208,7 @@ const handleNext = () => {
             {...register("serial")}
           />
           <input
-            className=" w-80 px-2 py-1 ml-1 border rounded-md bg-gray-50"
+            className=" w-80 px-2 py-1 ml-1 mt-1 border rounded-md bg-gray-50"
             type="text"
             placeholder="Name"
             onKeyDown={(e) => handleKeyPress(e, 'age')}
@@ -317,7 +317,7 @@ const handleNext = () => {
               <div className="hidden md:block lg:block"><span className="font-semibold ">More Tests will be here..</span></div>
               
             </div>
-            <div className="container fixed md:-ml-8 bottom-1.5 bg-sky-100 w-full flex items-center justify-center">
+            <div className="container fixed md:-ml-8 bottom-1.5 md:bottom-0 bg-sky-100 w-full flex items-center justify-center">
       <div className='md:-ml-40'>
       <Button.Group>
             <Button gradientMonochrome="info" size="xs"
