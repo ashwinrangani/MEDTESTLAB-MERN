@@ -40,7 +40,7 @@ const Weather = () => {
   return (
     <div>
       <div>{temperature} °C</div>
-      <div className='flex items-center h-6'>
+      <div className='flex items-end h-6'>
         {weatherDescription} <img className='ml-2 pt-0' src={weatherIcon} alt="Weather"/>
       </div>
     </div>

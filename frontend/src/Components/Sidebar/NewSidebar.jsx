@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { CgMenuRound } from "react-icons/cg";
 import { FaMicroscope, FaWindowClose } from 'react-icons/fa';
-import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiViewBoards } from 'react-icons/hi';
+import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiOutlineViewGrid  } from 'react-icons/hi';
 import { Button } from 'flowbite-react'
 import Clock from './Clock';
 import Weather from './Weather';
@@ -63,16 +63,19 @@ const user = localStorage.getItem('userInfo');
             </div>
           </div>
           <div className='flex flex-col mt-4 space-y-2'>
+          <Link to='/dashboard'>
+              <button className='flex items-center w-full space-x-2 px-4 py-2 hover:bg-gray-700'>
+                <HiOutlineViewGrid  className='w-5 h-5' />
+                <span>Home</span>
+              </button>
+            </Link>
             <Link to='/patients'>
               <button className='flex items-center w-full space-x-2 px-4 py-2 hover:bg-gray-700'>
                 <HiChartPie className='w-5 h-5' />
                 <span>Generate Reports</span>
               </button>
             </Link>
-            {/* <button className='flex items-center w-full space-x-2 px-4 py-2 hover:bg-gray-700'>
-              <HiViewBoards className='w-5 h-5' />
-              <span>Test information</span>
-            </button> */}
+            
             <Link to='/drlist'>
               <button className='flex items-center w-full space-x-2 px-4 py-2 hover:bg-gray-700'>
                 <HiInbox className='w-5 h-5' />
@@ -92,7 +95,7 @@ const user = localStorage.getItem('userInfo');
               <span>Sign Out</span>
             </button>
           </div>
-          <div className='mt-40 ml-4'>
+          <div className='flex flex-col ml-20 md:mt-40 md:ml-4'>
           <Clock />
           <Weather />
           </div>
