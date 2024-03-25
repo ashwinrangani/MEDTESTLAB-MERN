@@ -317,7 +317,7 @@ const handleNext = () => {
               <div className="hidden md:block lg:block"><span className="font-semibold ">More Tests will be here..</span></div>
               
             </div>
-            <div className="container fixed md:-ml-8 bottom-0 bg-sky-100 w-full flex items-center justify-center">
+            <div className="container fixed md:-ml-8 bottom-1.5 bg-sky-100 w-full flex items-center justify-center">
       <div className='md:-ml-40'>
       <Button.Group>
             <Button gradientMonochrome="info" size="xs"

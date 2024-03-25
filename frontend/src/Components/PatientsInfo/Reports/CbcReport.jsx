@@ -430,7 +430,7 @@ const CbcReport = ({ register, setFocus }) => {
             </tr>
            
           </tbody>
-          <caption className="caption-bottom mt-1">
+          <caption className="caption-bottom text-sm mt-1">
           By immunoturbidimetry :: HAEMOGRAM Test done by Transasia Erba H360 Fully Automatic 22 parameter cell counter
   </caption>
         </table>
