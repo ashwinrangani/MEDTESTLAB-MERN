@@ -7,7 +7,7 @@ const getPatientPages = async (req, res) => {
     const patients = await Patient.find()
       .skip((page - 1) * limit)
       .limit(parseInt(limit))
-      .sort({ serial: "asc" });
+      .sort({ serial: "desc" });
 
     if (!patients || patients.length === 0) {
       return res.status(404).json({ error: "No Patients Found" });

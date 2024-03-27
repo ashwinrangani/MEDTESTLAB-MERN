@@ -238,7 +238,7 @@ const handleNext = () => {
           />
           <input
             className="w-48 px-2 py-1 ml-1 mt-1 border rounded-md bg-gray-50"
-            type="text"
+            type="number"
             placeholder="Mobile number"
             onKeyDown={(e) => handleKeyPress(e, 'refBy')}
             {...register("contact", { required: true })}
