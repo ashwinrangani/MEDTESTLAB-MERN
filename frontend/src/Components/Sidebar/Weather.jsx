@@ -35,13 +35,13 @@ const Weather = () => {
   const { main, weather } = weatherData;
   const temperature = main.temp;
   const weatherIcon = `http://openweathermap.org/img/wn/${weather[0].icon}.png`;
-  const weatherDescription = weather[0].description;
+  /* const weatherDescription = weather[0].description; */
 
   return (
     <div>
       <div>{temperature} °C</div>
-      <div className='flex items-end h-6'>
-        {weatherDescription} <img className='ml-2 pt-0' src={weatherIcon} alt="Weather"/>
+      <div className='flex items-end'>
+        <img src={weatherIcon} alt="Weather"/>
       </div>
     </div>
   );

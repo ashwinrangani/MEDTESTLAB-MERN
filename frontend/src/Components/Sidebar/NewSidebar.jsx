@@ -95,7 +95,7 @@ const user = localStorage.getItem('userInfo');
               <span>Sign Out</span>
             </button>
           </div>
-          <div className='flex flex-col ml-20 md:mt-40 md:ml-4'>
+          <div className='flex flex-col ml-20 mt-6 gap-1 md:mt-40 md:ml-4'>
           <Clock />
           <Weather />
           </div>
