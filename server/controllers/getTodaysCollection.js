@@ -3,12 +3,12 @@ import { Patient } from "../models/patientModel.js";
 const getTodaysCollection = async (req, res) => {
     
     try {
-        const today = new Date();
-const year = today.getFullYear();
-const month = String(today.getMonth() + 1).padStart(2, '0');
-const day = String(today.getDate()).padStart(2, '0');
+        const options = { timeZone: 'Asia/Kolkata' }; // India timezone
+const today = new Date().toLocaleString('en-US', options);
+const [month, day, year] = today.split(',')[0].split('/').map(part => part.padStart(2, '0'));
 
 const formattedDate = `${year}-${month}-${day}`;
+
 
           
        console.log(formattedDate)

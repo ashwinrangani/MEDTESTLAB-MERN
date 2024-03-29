@@ -4,7 +4,7 @@ import { useForm, } from "react-hook-form";
 import { useDoctorList } from "../context/DrListContext";
 import CbcReport from "./Reports/CbcReport";
 import UrineReport from "./Reports/UrineReport";
-import { Button, Dropdown } from "flowbite-react";
+import { Button, Dropdown, Tooltip } from "flowbite-react";
 import { FaUserPlus } from "react-icons/fa6";
 import { MdClear } from "react-icons/md";
 import { MdOutlineNewLabel } from "react-icons/md";
@@ -80,8 +80,8 @@ const PatientInfo = () => {
       const response = await axios.get(`${base_url}/getlastpatient/${serial}`)
       const { patient } = response.data;
       setPatientData(patient)
-      const fotmatteDate = new Date(patient.date).toISOString().split('T')[0];
-      setValue('date', fotmatteDate)
+      const formatDate = new Date(patient.date).toISOString().split('T')[0];
+      setValue('date', formatDate)
 
      Object.keys(patient).forEach((key) => {
       if (key!=='date' && key!=='tests'){
@@ -189,8 +189,12 @@ const handleNext = () => {
     setVisibleForm(formType);
   };
 
-
-
+const today = new Date();
+const dd = String(today.getDate()).padStart(2, '0');
+const mm = String(today.getMonth() + 1).padStart(2, '0');
+const yyyy = today.getFullYear();
+const formatDate = `${yyyy}-${mm}-${dd}`;
+  
  
   return (
     <div className={`md:ml-44 mb-10 ${visibleForm ? 'h-full' : 'h-screen'} bg-sky-100`}>
@@ -213,14 +217,17 @@ const handleNext = () => {
             placeholder="Name"
             onKeyDown={(e) => handleKeyPress(e, 'age')}
             {...register("name", { required: true })}
-          />
+            required
+          /> 
+          
+       
           <input
             className="w-24 px-2 py-1 ml-1 border rounded-md bg-gray-50"
             type="number"
             placeholder="Age"
             onKeyDown={(e) => handleKeyPress(e, 'gender')}
             {...register("age", { required: true })}
-          />
+          /> 
           <select
             className="w-32 px-2 py-1 mt-1 ml-1  border rounded-md bg-gray-50"
             onKeyDown={(e) => handleKeyPress(e, 'address')}
@@ -261,6 +268,7 @@ const handleNext = () => {
             className="px-2 w-36 py-1 ml-1 mt-1 border rounded-md bg-gray-50"
             type="date"
             placeholder="Date"
+            defaultValue={formatDate}
             onKeyDown={(e) => handleKeyPress(e, 'time')}
             {...register("date", {})}
           />

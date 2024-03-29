@@ -52,7 +52,7 @@ function NewSidebar() {
       <div className='lg:flex md:flex'>
         <div className='flex items-center sm:block md:hidden lg:hidden bg-sky-700 h-12 w-full'>
           <Button
-            className='m-2 h-7 w-7  flex items-center justify-center'
+            className='m-2 h-7 w-7  flex items-center justify-center transition ease-in-out delay-300'
             onClick={toggleSidebar}
           >
             {isSidebarVisible ? (
@@ -78,30 +78,30 @@ function NewSidebar() {
           </div>
           <div className='flex flex-col mt-4 space-y-2'>
             <Link to='/dashboard'>
-              <button className='flex items-center w-full space-x-2 px-4 py-2 hover:bg-gray-700'>
+              <button className='flex items-center w-full hover:font-semibold space-x-2 px-4 py-2 hover:bg-gray-700'>
                 <HiOutlineViewGrid  className='w-5 h-5' />
                 <span>Home</span>
               </button>
             </Link>
             <Link to='/patients'>
-              <button className='flex items-center w-full space-x-2 px-4 py-2 hover:bg-gray-700'>
+              <button className='flex items-center w-full hover:font-semibold space-x-2 px-4 py-2 hover:bg-gray-700'>
                 <HiChartPie className='w-5 h-5' />
                 <span>Generate Reports</span>
               </button>
             </Link>
             <Link to='/drlist'>
-              <button className='flex items-center w-full space-x-2 px-4 py-2 hover:bg-gray-700'>
+              <button className='flex items-center w-full hover:font-semibold space-x-2 px-4 py-2 hover:bg-gray-700'>
                 <HiInbox className='w-5 h-5' />
                 <span>Doctor's List</span>
               </button>
             </Link>
             <Link to='/accounts'>
-              <button className='flex items-center w-full space-x-2 px-4 py-2 hover:bg-gray-700'>
+              <button className='flex items-center w-full hover:font-semibold space-x-2 px-4 py-2 hover:bg-gray-700'>
                 <HiShoppingBag className='w-5 h-5' />
-                <span>Expenses</span>
+                <span>Accounts</span>
               </button>
             </Link>
-            <button onClick={handleSignOut} className='flex items-center w-full space-x-2 px-4 py-2 hover:bg-gray-700'>
+            <button onClick={handleSignOut} className='flex items-center hover:font-semibold w-full space-x-2 px-4 py-2 hover:bg-gray-700'>
               <HiArrowSmRight className='w-5 h-5' />
               <span>Sign Out</span>
             </button>
