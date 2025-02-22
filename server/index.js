@@ -12,7 +12,12 @@ const PORT = process.env.PORT;
 mongoose.connect(process.env.MONGO_URL)
 .then(()=> console.log('database connected'))
 .catch((error)=>console.error(error))
-app.use(cors());
+app.use(cors({
+  origin: 'https://lab-care.vercel.app', 
+  credentials: true, 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use('/', router);
 
 
